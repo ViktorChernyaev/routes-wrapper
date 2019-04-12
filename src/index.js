@@ -1,15 +1,12 @@
-import 'core-js/es6/map';
-import 'core-js/es6/set';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import connect from '@vkontakte/vkui-connect';
-import registerServiceWorker from './sw';
+import "core-js/es6/map";
+import "core-js/es6/set";
+import "@vkontakte/vkui/dist/vkui.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import connect from "@vkontakte/vkui-connect";
+import { Application } from "features/app/application";
+import registerServiceWorker from "./sw";
 
-// Init VK App
-connect.send('VKWebAppInit', {});
-
+connect.send("VKWebAppInit", {});
 registerServiceWorker();
-
-const App = () => <div>Kek</div>
-
-ReactDOM.render(<App />, document.getElementById('entry'));
+ReactDOM.render(<Application />, document.getElementById("entry"));
