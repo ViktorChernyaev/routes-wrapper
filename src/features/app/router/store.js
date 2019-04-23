@@ -8,8 +8,8 @@ export const changeRoute = createEffect("effect which changes route").use((path,
   throw new Error("Please provide valid path");
 });
 
-const $view = createStore("first");
-const $panel = createStore("list");
+export const $view = createStore("first");
+export const $panel = createStore("list");
 const $query = createStore("");
 const $params = $query.map(query => query.split("&").reduce((acc, item) => {
   const [key, value] = item.split("=");
@@ -23,6 +23,5 @@ $query.on(changeRoute.done, (_, { result }) => result.query);
 export const $router = createStoreObject({
   view: $view,
   panel: $panel,
-  query: $query,
   params: $params
 });
