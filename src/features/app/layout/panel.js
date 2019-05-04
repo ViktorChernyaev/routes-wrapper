@@ -4,8 +4,8 @@ import { useStore } from "effector-react";
 import { $router, config } from "features/app/router";
 
 export const Panel = React.memo(({ id, children }) => {
-  const { view, panel } = useStore($router);
-  const { title } = config[view][panel];
+  const { epic, view, panel } = useStore($router);
+  const { title } = config[epic][view][panel];
   return (
     <UI.Panel id={id}>
       <UI.PanelHeader>{title}</UI.PanelHeader>
