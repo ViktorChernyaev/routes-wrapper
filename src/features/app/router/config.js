@@ -1,18 +1,30 @@
+export const viewIds = {
+  first: "first",
+  second: "second"
+};
+
+export const panelIds = {
+  list: "list",
+  show: "show",
+  kek: "kek",
+  pek: "pek",
+};
+
 export const config = {
-  first: {
-    list: {
+  [viewIds.first]: {
+    [panelIds.list]: {
       title: "first list"
     },
-    show: {
+    [panelIds.show]: {
       title: "first show"
     },
   },
-  second: {
-    list: {
-      title: "second list"
+  [viewIds.second]: {
+    [panelIds.kek]: {
+      title: "second kek"
     },
-    show: {
-      title: "second show"
+    [panelIds.pek]: {
+      title: "second pek"
     },
   },
 };

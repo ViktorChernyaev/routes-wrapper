@@ -2,7 +2,7 @@ export { $router, $view, $panel } from "./store";
 export {
   gotoFirstList,
   gotoFirstShow,
-  gotoSecondList,
-  gotoSecondShow
+  gotoSecondKek,
+  gotoSecondPek
 } from "./actions";
-export { config } from "./config";
+export { config, viewIds, panelIds } from "./config";

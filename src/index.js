@@ -4,7 +4,7 @@ import "@vkontakte/vkui/dist/vkui.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import connect from "@vkontakte/vkui-connect";
-import { Application } from "features/app/application";
+import { Application } from "features/app/routes";
 import registerServiceWorker from "./sw";
 
 connect.send("VKWebAppInit", {});
