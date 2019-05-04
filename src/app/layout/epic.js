@@ -3,7 +3,7 @@ import * as UI from "@vkontakte/vkui";
 import { useStore } from "effector-react";
 import Icon28Newsfeed from "@vkontakte/icons/dist/28/newsfeed";
 import Icon28Favorite from "@vkontakte/icons/dist/28/favorite";
-import { $epic, gotoe1v1p1, gotoe2v3p5 } from "features/app/router";
+import { $epic, gotoe1v1p1, gotoe2v3p5 } from "app/router";
 
 export const Epic = React.memo(({ children }) => {
   const currentEpic = useStore($epic);

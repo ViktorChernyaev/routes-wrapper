@@ -1,7 +1,7 @@
 import React from "react";
 import * as UI from "@vkontakte/vkui";
 import { useStore } from "effector-react";
-import { $panel } from "features/app/router";
+import { $panel } from "app/router";
 
 export const View = React.memo(({ id, children }) => {
   const currentPanel = useStore($panel);

@@ -1,6 +1,4 @@
 import React from "react";
-import { Epic, Root, View, Panel } from "features/app/layout";
-import { epicIds, viewIds, panelIds } from "features/app/router";
 import { E1V1P1 } from "features/testViews/e1v1p1";
 import { E1V1P2 } from "features/testViews/e1v1p2";
 import { E1V2P3 } from "features/testViews/e1v2p3";
@@ -9,6 +7,8 @@ import { E2V3P5 } from "features/testViews/e2v3p5";
 import { E2V3P6 } from "features/testViews/e2v3p6";
 import { E2V4P7 } from "features/testViews/e2v4p7";
 import { E2V4P8 } from "features/testViews/e2v4p8";
+import { Epic, Root, View, Panel } from "./layout";
+import { epicIds, viewIds, panelIds } from "./router";
 
 export const Application = () => {
   return (

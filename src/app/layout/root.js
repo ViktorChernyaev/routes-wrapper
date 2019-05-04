@@ -1,7 +1,7 @@
 import React from "react";
 import * as UI from "@vkontakte/vkui";
 import { useStore } from "effector-react";
-import { $view } from "features/app/router";
+import { $view } from "app/router";
 
 export const Root = React.memo(({ children }) => {
   const currentView = useStore($view);
