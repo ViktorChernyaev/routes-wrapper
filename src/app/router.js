@@ -1,110 +1,70 @@
-import { initRouter } from "lib/router";
+import { createStore, createEvent } from "effector";
+import { createBrowserHistory } from "history";
+import { setHashParams } from "lib/window";
 
-export const epicIds = {
-  epic1: "epic1",
-  epic2: "epic2",
-  epic3: "epic3",
-}
+const history = createBrowserHistory();
 
-export const viewIds = {
-  view1: "view1",
-  view2: "view2",
-  view3: "view3",
-  view4: "view4",
-  view5: "view5",
-  view6: "view6",
+export const $path = createStore("epic1/view1/panel1");
+export const $params = createStore({});
+history.replace({ hash: "epic1/view1/panel1", state: {} });
+const routeChanges = createEvent("fires when path changes");
+$path.on(routeChanges, (_, { name }) => name);
+$params.on(routeChanges, (_, { params }) => params || {});
+
+history.listen((location, action) => {
+  const name = location.hash.replace("#", "");
+  alert(JSON.stringify({ name, action }));
+  routeChanges({ name, params: location.state });
+});
+
+routeChanges.watch(({ name, params }) => {
+  if (!params) return setHashParams(name);
+  const qs = Object.entries(params).map(([name, value]) => `${name}_${value}`).join("/");
+  return setHashParams(`${name}/${qs}`);
+});
+
+export const $splittedRoute = $path.map(item => item.split("/"));
+export const $epic = $splittedRoute.map(item => item[0]);
+export const $view = $splittedRoute.map(item => item[1]);
+export const $panel = $splittedRoute.map(item => item[2]);
+
+
+export const goBack = () => {
+  history.goBack();
 };
-
-export const panelIds = {
-  panel1: "panel1",
-  panel2: "panel2",
-  panel3: "panel3",
-  panel4: "panel4",
-  panel5: "panel5",
-  panel6: "panel6",
-  panel7: "panel7",
-  panel8: "panel8",
-  panel9: "panel9",
-  panel10: "panel10",
-  panel11: "panel11",
-  panel12: "panel12",
+export const gotoe1v1p1 = () => {
+  history.push({ hash: "epic1/view1/panel1", state: {} });
 };
-
-const initialState = {
-  epic: epicIds.epic1,
-  view: viewIds.view1,
-  panel: panelIds.panel1,
-  query: ""
+export const gotoe1v1p2 = () => {
+  history.push({ hash: "epic1/view1/panel2", state: {} });
 };
-const { changeRoute, $epic, $view, $panel, $router } = initRouter(initialState);
-export { $epic, $view, $panel, $router };
-
-export const gotoe1v1p1 = () => changeRoute(`${epicIds.epic1}/${viewIds.view1}/${panelIds.panel1}`);
-export const gotoe1v1p2 = () => changeRoute(`${epicIds.epic1}/${viewIds.view1}/${panelIds.panel2}`);
-export const gotoe1v2p3 = () => changeRoute(`${epicIds.epic1}/${viewIds.view2}/${panelIds.panel3}`);
-export const gotoe1v2p4 = () => changeRoute(`${epicIds.epic1}/${viewIds.view2}/${panelIds.panel4}`);
-export const gotoe2v3p5 = () => changeRoute(`${epicIds.epic2}/${viewIds.view3}/${panelIds.panel5}`);
-export const gotoe2v3p6 = () => changeRoute(`${epicIds.epic2}/${viewIds.view3}/${panelIds.panel6}`);
-export const gotoe2v4p7 = () => changeRoute(`${epicIds.epic2}/${viewIds.view4}/${panelIds.panel7}`);
-export const gotoe2v4p8 = () => changeRoute(`${epicIds.epic2}/${viewIds.view4}/${panelIds.panel8}`);
-export const gotoe3v5p9 = () => changeRoute(`${epicIds.epic3}/${viewIds.view5}/${panelIds.panel9}`);
-export const gotoe3v5p10 = () => changeRoute(`${epicIds.epic3}/${viewIds.view5}/${panelIds.panel10}`);
-export const gotoe3v6p11 = () => changeRoute(`${epicIds.epic3}/${viewIds.view6}/${panelIds.panel11}`);
-export const gotoe3v6p12 = () => changeRoute(`${epicIds.epic3}/${viewIds.view6}/${panelIds.panel12}`);
-
-export const routes = {
-  [epicIds.epic1]: {
-    [viewIds.view1]: {
-      [panelIds.panel1]: {
-        title: "epic1 view1 panel1"
-      },
-      [panelIds.panel2]: {
-        title: "epic1 view1 panel2"
-      },
-    },
-    [viewIds.view2]: {
-      [panelIds.panel3]: {
-        title: "epic1 view2 panel3"
-      },
-      [panelIds.panel4]: {
-        title: "epic1 view2 panel4"
-      },
-    },
-  },
-  [epicIds.epic2]: {
-    [viewIds.view3]: {
-      [panelIds.panel5]: {
-        title: "epic2 view3 panel5"
-      },
-      [panelIds.panel6]: {
-        title: "epic2 view3 panel6"
-      },
-    },
-    [viewIds.view4]: {
-      [panelIds.panel7]: {
-        title: "epic2 view4 panel7"
-      },
-      [panelIds.panel8]: {
-        title: "epic2 view4 panel8"
-      },
-    },
-  },
-  [epicIds.epic3]: {
-    [viewIds.view5]: {
-      [panelIds.panel9]: {
-        title: "epic3 view5 panel9"
-      },
-      [panelIds.panel10]: {
-        title: "epic3 view5 panel10"
-      },
-    },
-    [viewIds.view6]: {
-      [panelIds.panel11]: {
-        title: "epic3 view6 panel11"
-      },
-      [panelIds.panel12]: {
-        title: "epic3 view6 panel12"
-      },
-    },
-  },
+export const gotoe1v2p3 = () => {
+  history.push({ hash: "epic1/view2/panel3", state: {} });
+};
+export const gotoe1v2p4 = () => {
+  history.push({ hash: "epic1/view2/panel4", state: {} });
+};
+export const gotoe2v3p5 = () => {
+  history.push({ hash: "epic2/view3/panel5", state: {} });
+};
+export const gotoe2v3p6 = () => {
+  history.push({ hash: "epic2/view3/panel6", state: {} });
+};
+export const gotoe2v4p7 = () => {
+  history.push({ hash: "epic2/view4/panel7", state: {} });
+};
+export const gotoe2v4p8 = () => {
+  history.push({ hash: "epic2/view4/panel8", state: {} });
+};
+export const gotoe3v5p9 = () => {
+  history.push({ hash: "epic3/view5/panel9", state: {} });
+};
+export const gotoe3v5p10 = () => {
+  history.push({ hash: "epic3/view5/panel10", state: {} });
+};
+export const gotoe3v6p11 = () => {
+  history.push({ hash: "epic3/view6/panel11", state: {} });
+};
+export const gotoe3v6p12 = () => {
+  history.push({ hash: "epic3/view6/panel12", state: {} });
 };

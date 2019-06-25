@@ -3,7 +3,8 @@ import * as UI from "@vkontakte/vkui";
 import { useStore } from "effector-react";
 import Icon28Newsfeed from "@vkontakte/icons/dist/28/newsfeed";
 import Icon28Favorite from "@vkontakte/icons/dist/28/favorite";
-import { $epic, gotoe1v1p1, gotoe2v3p5 } from "app/router";
+import Icon24Article from "@vkontakte/icons/dist/24/article";
+import { $epic, gotoe1v1p1, gotoe2v3p5, gotoe3v5p9 } from "app/router";
 
 export const Epic = React.memo(({ children }) => {
   const currentEpic = useStore($epic);
@@ -17,6 +18,9 @@ export const Epic = React.memo(({ children }) => {
           </UI.TabbarItem>
           <UI.TabbarItem onClick={gotoe2v3p5} selected={currentEpic === "epic2"} text="epic2">
             <Icon28Favorite />
+          </UI.TabbarItem>
+          <UI.TabbarItem onClick={gotoe3v5p9} selected={currentEpic === "epic3"} text="epic3">
+            <Icon24Article />
           </UI.TabbarItem>
         </UI.Tabbar>
       }>
