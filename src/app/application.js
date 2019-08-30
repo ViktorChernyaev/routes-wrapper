@@ -1,40 +1,50 @@
 import React from "react";
-import { TestView } from "features/testView";
-import { Epic, Root, View, Panel } from "./layout";
+import { View, Panel, Group, CellButton } from "@vkontakte/vkui";
+import { useStore } from "effector-react";
+import { $panel, goBack, gotoPanel2, gotoPanel3, gotoPanel4 } from "./router";
+
+const TestView = React.memo(({ canBack, action, actionText, active }) => {
+  return (
+    <Group>
+      {canBack && <CellButton onClick={goBack}>Назад</CellButton>}
+      {!!actionText && <CellButton onClick={action} level={active ? "primary" : "danger"}>{actionText}</CellButton>}
+    </Group>
+  );
+});
 
 export const Application = () => {
+  const activePanel = useStore($panel);
   return (
-    <Epic>
-      <Root id="epic1">
-        <View id="view1">
-          <Panel id="panel1"><TestView /></Panel>
-          <Panel id="panel2"><TestView /></Panel>
-        </View>
-        <View id="view2">
-          <Panel id="panel3"><TestView /></Panel>
-          <Panel id="panel4"><TestView /></Panel>
-        </View>
-      </Root>
-      <Root id="epic2">
-        <View id="view3">
-          <Panel id="panel5"><TestView /></Panel>
-          <Panel id="panel6"><TestView /></Panel>
-        </View>
-        <View id="view4">
-          <Panel id="panel7"><TestView /></Panel>
-          <Panel id="panel8"><TestView /></Panel>
-        </View>
-      </Root>
-      <Root id="epic3">
-        <View id="view5">
-          <Panel id="panel9"><TestView /></Panel>
-          <Panel id="panel10"><TestView /></Panel>
-        </View>
-        <View id="view6">
-          <Panel id="panel11"><TestView /></Panel>
-          <Panel id="panel12"><TestView /></Panel>
-        </View>
-      </Root>
-    </Epic>
+    <View id="view1" activePanel={activePanel} header={false}>
+      <Panel id="panel1">
+        <TestView
+          active={activePanel === "panel1"}
+          action={gotoPanel2}
+          actionText="go to panel2"
+        />
+      </Panel>
+      <Panel id="panel2">
+        <TestView
+          active={activePanel === "panel2"}
+          action={gotoPanel3}
+          actionText="go to panel3"
+          canBack={true}
+        />
+      </Panel>
+      <Panel id="panel3">
+        <TestView
+          active={activePanel === "panel3"}
+          action={gotoPanel4}
+          actionText="go to panel4"
+          canBack={true}
+        />
+      </Panel>
+      <Panel id="panel4">
+        <TestView
+          active={activePanel === "panel4"}
+          canBack={true}
+        />
+      </Panel>
+    </View>
   );
 };
